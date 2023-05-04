@@ -11,7 +11,7 @@ class Observer {
 protected:
     virtual ~Observer() {};
 public:
-    virtual void update(int percentage) = 0;
+    virtual void update() = 0;
 };
 
 
