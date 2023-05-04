@@ -13,11 +13,12 @@
 class FileLoader : public Subject{
 
 public:
-    void loadFile(QFileInfo f);
+    bool addFile(QFileInfo f);
     void removeFile(QFileInfo f);
     int getCurrentLoadingProgress() const{
         return currentLoadingProgress;
     }
+    void loadFile();
 private:
     std::list<QFileInfo> fileDb;
     int currentLoadingProgress{0};

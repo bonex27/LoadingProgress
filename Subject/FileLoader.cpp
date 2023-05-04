@@ -17,9 +17,16 @@ void FileLoader::removeFile(QFileInfo f) {
             i++;
     }*/
 }
+/**
+ *Insert file to load inside "db"
+ * @param f file to be add
+ * @return false if just exist
+ * */
+bool FileLoader::addFile(QFileInfo f) {
 
-void FileLoader::loadFile(QFileInfo f) {
-
+    std::list<QFileInfo>::iterator findIter = std::find(fileDb.begin(), fileDb.end(), f);
+    if(findIter != fileDb.end())
+        return false;
     fileDb.push_back(f);
-
+    return true;
 }

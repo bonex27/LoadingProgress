@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <QFileDialog>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_MainWindow.h"
 
@@ -40,7 +41,8 @@ void MainWindow::on_selectFileButton_click() {
                                                               tr("Image Files (*.png *.jpg  *.txt)"));
         for (auto file: fileNames) {
             QFileInfo fileInfo(file);
-            fl->loadFile(fileInfo);
+            if(!fl->addFile(fileInfo))
+                QMessageBox::warning(this,"Warning", fileInfo.fileName()+" just exist");
         }
 //    }
   //  catch(Exce)
