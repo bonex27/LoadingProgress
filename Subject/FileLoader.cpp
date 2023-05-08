@@ -2,6 +2,7 @@
 // Created by pbone on 04/05/2023.
 //
 
+#include <thread>
 #include "FileLoader.h"
 
 void FileLoader::removeFile(QFileInfo f) {
@@ -29,4 +30,28 @@ bool FileLoader::addFile(QFileInfo f) {
         return false;
     fileDb.push_back(f);
     return true;
+}
+/**
+ * This function simulate files loading and update the current file loading status and  files waiting to be loaded
+**/
+void FileLoader::loadFile() {
+
+    loadedFile = 0;
+    for(int i = 0; i < fileDb.size() ; i++)
+    {
+        currentLoadingProgress = 0;
+        notifyObservers();
+        for(int j = 0; j < 4 ; j++)
+        {
+            std::this_thread::sleep_for (std::chrono::seconds(2));
+            currentLoadingProgress++;
+            notifyObservers();
+        }
+        notifyObservers();
+
+        std::this_thread::sleep_for (std::chrono::seconds(1));
+        loadedFile++;
+        notifyObservers();
+    }
+    fileDb.clear();
 }

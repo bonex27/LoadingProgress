@@ -15,6 +15,8 @@
 MainWindow::MainWindow(FileLoader* fl, QWidget *parent) :
         fl(fl), QMainWindow(parent), ui(new Ui::MainWindow) {
         ui->setupUi(this);
+        ui->lblActual->setText("Actual file");
+        ui->lblTotal->setText("Files to load");
         ui->pbActual->setValue(0);
         ui->pbTotal->setValue(0);
         fl->registerObserver(this);
@@ -28,15 +30,17 @@ MainWindow::~MainWindow() {
 
 void MainWindow::update() {
     ui->pbActual->setValue(fl->getCurrentLoadingProgress());
-
+    ui->pbTotal->setValue(fl->getLoadedFile());
 }
 
 void MainWindow::on_loadFileButton_click() {
-    fl->getCurrentLoadingProgress();
+    ui->pbActual->setMaximum(4);
+    ui->pbTotal->setMaximum(fl->getFileToLoadLenght());
+    fl->loadFile();
 }
 
 void MainWindow::on_selectFileButton_click() {
-    //try {
+
         QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Select files to load"), "",
                                                               tr("Image Files (*.png *.jpg  *.txt)"));
         for (auto file: fileNames) {
@@ -44,7 +48,6 @@ void MainWindow::on_selectFileButton_click() {
             if(!fl->addFile(fileInfo))
                 QMessageBox::warning(this,"Warning", fileInfo.fileName()+" just exist");
         }
-//    }
-  //  catch(Exce)
+
 }
 

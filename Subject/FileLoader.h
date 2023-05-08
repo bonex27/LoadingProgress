@@ -18,6 +18,13 @@ public:
     int getCurrentLoadingProgress() const{
         return currentLoadingProgress;
     }
+    int getLoadedFile() const{
+        return loadedFile;
+    }
+    int getFileToLoadLenght()
+    {
+        return fileDb.size();
+    }
     void loadFile();
 private:
     std::list<QFileInfo> fileDb;
