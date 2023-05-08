@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 # Required if: 1) using macOS and 2) using Brew
-#set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt/6.4.3/lib/cmake/")
+if(APPLE})
+    set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt/6.4.3/lib/cmake/")
+endif()
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
