@@ -28,7 +28,7 @@ add_executable(LoadingProgress
         Observer/MainWindow/mainwindow.cpp
         Observer/MainWindow/mainwindow.h
         main.cpp Subject/FileLoader.cpp Subject/FileLoader.h)
-add_executable(qtHelloWorld WIN32 main.cpp)
+add_subdirectory(tests)
 
 
 # Use the Widgets module from Qt 5.
