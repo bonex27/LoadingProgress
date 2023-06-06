@@ -10,7 +10,6 @@
 #include "mainwindow.h"
 #include "ui_MainWindow.h"
 
-//Todo Check if file just exist and  throw exception if don't select file
 
 MainWindow::MainWindow(FileLoader* fl, QWidget *parent) :
         fl(fl), QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -34,9 +33,15 @@ void MainWindow::update() {
 }
 
 void MainWindow::on_loadFileButton_click() {
-    ui->pbActual->setMaximum(4);
-    ui->pbTotal->setMaximum(fl->getFileToLoadLenght());
-    fl->loadFile();
+    if(fl->getFileToLoadLenght() > 0){
+        ui->pbActual->setMaximum(4);
+        ui->pbTotal->setMaximum(fl->getFileToLoadLenght());
+        fl->loadFile();
+    }
+    else
+        QMessageBox::warning(this,"Warning", "You need to select one or more file");
+
+
 }
 
 void MainWindow::on_selectFileButton_click() {
