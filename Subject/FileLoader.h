@@ -9,12 +9,13 @@
 #include <QFileInfo>
 
 #include "Interfaces/Subject.h"
+#include "File.h"
 
 class FileLoader : public Subject{
 
 public:
-    bool addFile(QFileInfo f);
-    void removeFile(QFileInfo f);
+    bool addFile(File f);
+    void removeFile(File f);
     int getCurrentLoadingProgress() const{
         return currentLoadingProgress;
     }
@@ -27,7 +28,7 @@ public:
     }
     void loadFile();
 private:
-    std::list<QFileInfo> fileDb;
+    std::list<File> fileDb;
     int currentLoadingProgress{0};
     int loadedFile{0};
 };

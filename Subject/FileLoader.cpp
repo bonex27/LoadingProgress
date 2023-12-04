@@ -5,8 +5,8 @@
 #include <thread>
 #include "FileLoader.h"
 
-void FileLoader::removeFile(QFileInfo f) {
-    fileDb.remove(f);
+void FileLoader::removeFile(File f) {
+    //fileDb.remove(f);
     /*for(auto file : fileDb)
     {
         if(file.fileName() == f.fileName())
@@ -23,9 +23,8 @@ void FileLoader::removeFile(QFileInfo f) {
  * @param f file to be add
  * @return false if just exist
  * */
-bool FileLoader::addFile(QFileInfo f) {
-
-    std::list<QFileInfo>::iterator findIter = std::find(fileDb.begin(), fileDb.end(), f);
+bool FileLoader::addFile(const File f) {
+    std::list<File>::iterator findIter = std::find(fileDb.begin(), fileDb.end(), f);
     if(findIter != fileDb.end())
         return false;
     fileDb.push_back(f);

@@ -46,12 +46,12 @@ void MainWindow::on_loadFileButton_click() {
 
 void MainWindow::on_selectFileButton_click() {
 
-        QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Select files to load"), "",
+        QList<QUrl> fileNames = QFileDialog::getOpenFileUrls(this, tr("Select files to load"), QUrl(),
                                                               tr("Image Files (*.png *.jpg  *.txt)"));
         for (auto file: fileNames) {
-            QFileInfo fileInfo(file);
-            if(!fl->addFile(fileInfo))
-                QMessageBox::warning(this,"Warning", fileInfo.fileName()+" just exist");
+
+            if(!fl->addFile(File(file.fileName(),file.path())))
+                QMessageBox::warning(this,"Warning", file.fileName()+" just loaded");
         }
 
 }

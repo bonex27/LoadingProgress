@@ -27,8 +27,8 @@ add_executable(LoadingProgress
         Interfaces/Subject.h
         Observer/MainWindow/mainwindow.cpp
         Observer/MainWindow/mainwindow.h
-        main.cpp Subject/FileLoader.cpp Subject/FileLoader.h)
-add_subdirectory(tests)
+        main.cpp Subject/FileLoader.cpp Subject/FileLoader.h Subject/File.cpp Subject/File.h)
+#add_subdirectory(tests)
 
 
 # Use the Widgets module from Qt 5.
