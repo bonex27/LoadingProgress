@@ -6,16 +6,15 @@
 #define LOADINGPROGRESS_FILELOADER_H
 
 #include <list>
-#include <QFileInfo>
-
-#include "Interfaces/Subject.h"
-#include "File.h"
+#include <string>
+#include "../Interfaces/Subject.h"
+#include "FileP.h"
 
 class FileLoader : public Subject{
 
 public:
-    bool addFile(File f);
-    void removeFile(File f);
+    bool addFile(const FileP& f);
+    bool removeFile(const std::string& name);
     int getCurrentLoadingProgress() const{
         return currentLoadingProgress;
     }
@@ -28,7 +27,7 @@ public:
     }
     void loadFile();
 private:
-    std::list<File> fileDb;
+    std::list<FileP> fileDb;
     int currentLoadingProgress{0};
     int loadedFile{0};
 };

@@ -4,40 +4,33 @@
 #include "gtest/gtest.h"
 #include "../Subject/FileLoader.h"
 
-TEST(FileLoader, AddImage) {
+#include <bemapiset.h>
+
+
+TEST(FileLoader, addFile) {
     FileLoader db;
 
-ASSERT_TRUE(db.addFile(new QFileInfo()));
-ASSERT_FALSE(db.addImage({"test", "png"}));       // Insert image with same name
-ASSERT_TRUE(db.addImage({"test2", "png"}));
-ASSERT_TRUE(db.addImage({"test3", "png"}));
+    ASSERT_TRUE(db.addFile({"img.png","c:\\user\\immagini"}));
+    ASSERT_FALSE(db.addFile({"img.png","c:\\user\\immagini"})); // Add existing file
+    ASSERT_TRUE(db.addFile({"img1.png","c:\\user\\immagini"})); // Add existing file
+
 }
 
-TEST(FileLoader, RemoveImage) {
+TEST(FileLoader, removeFile) {
     FileLoader db;
 
-ASSERT_TRUE(db.addImage({"test", "png"}));
-ASSERT_TRUE(db.addImage({"test2", "png"}));
-ASSERT_TRUE(db.addImage({"test3", "png"}));
+    ASSERT_TRUE(db.addFile({"img.png","c:\\user\\immagini"}));
+    ASSERT_TRUE(db.addFile({"img1.png","c:\\user\\immagini"})); // Add existing file
+    ASSERT_FALSE(db.removeFile("img2.png"));
+    ASSERT_TRUE(db.removeFile("img1.png"));
+}
+TEST(FileLoader, getLoadedFile) {
+    FileLoader db;
 
-ASSERT_TRUE(db.removeImage("test"));
-ASSERT_TRUE(db.removeImage("test3"));
-ASSERT_FALSE(db.removeImage("nonExistingName"));    // Removing non existing image
-ASSERT_TRUE(db.removeImage("test2"));
-ASSERT_FALSE(db.removeImage("test2"));              // Removing image on empty database
+    ASSERT_TRUE(db.addFile({"img.png","c:\\user\\immagini"}));
+    ASSERT_TRUE(db.addFile({"img1.png","c:\\user\\immagini"})); // Add existing file
+    ASSERT_EQ(db.getLoadedFile(),0);
+    db.loadFile();
+    ASSERT_EQ(db.getLoadedFile(),2);
 }
 
-TEST(FileLoader, GetImage) {
-ImagesDatabase db;
-
-ASSERT_TRUE(db.addImage({"test", "png"}));
-ASSERT_TRUE(db.addImage({"test2", "png"}));
-ASSERT_TRUE(db.addImage({"test3", "png"}));
-
-EXPECT_NO_THROW(db.getImage("test"));
-Image i = db.getImage("test");
-ASSERT_EQ(i.getName(), "test");
-ASSERT_EQ(i.getExtension(), "png");
-
-EXPECT_THROW(db.getImage("nonExistingName"), std::out_of_range);
-}

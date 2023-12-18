@@ -5,26 +5,23 @@
 #include <thread>
 #include "FileLoader.h"
 
-void FileLoader::removeFile(File f) {
-    //fileDb.remove(f);
-    /*for(auto file : fileDb)
-    {
-        if(file.fileName() == f.fileName())
-        {
-            i=fileDb.erase(i);
-            loadedFile++;
+bool FileLoader::removeFile(const std::string& name) {
+    for(FileP item : fileDb) {
+        if(item.getName() == name) {
+            fileDb.remove(item);
+            return true;
         }
-        else
-            i++;
-    }*/
+
+    }
+    return false;
 }
 /**
  *Insert file to load inside "db"
  * @param f file to be add
  * @return false if just exist
  * */
-bool FileLoader::addFile(const File f) {
-    std::list<File>::iterator findIter = std::find(fileDb.begin(), fileDb.end(), f);
+bool FileLoader::addFile(const FileP& f) {
+    auto findIter = std::find(fileDb.begin(), fileDb.end(), f);
     if(findIter != fileDb.end())
         return false;
     fileDb.push_back(f);

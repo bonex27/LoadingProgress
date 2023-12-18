@@ -48,9 +48,9 @@ void MainWindow::on_selectFileButton_click() {
 
         QList<QUrl> fileNames = QFileDialog::getOpenFileUrls(this, tr("Select files to load"), QUrl(),
                                                               tr("Image Files (*.png *.jpg  *.txt)"));
-        for (auto file: fileNames) {
+        for (const auto& file: fileNames) {
 
-            if(!fl->addFile(File(file.fileName(),file.path())))
+            if(!fl->addFile(FileP(file.fileName().toStdString(), file.path().toStdString())))
                 QMessageBox::warning(this,"Warning", file.fileName()+" just loaded");
         }
 
