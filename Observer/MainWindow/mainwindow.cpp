@@ -24,12 +24,15 @@ MainWindow::MainWindow(FileLoader* fl, QWidget *parent) :
 }
 
 MainWindow::~MainWindow() {
+    fl->removeObserver(this);
     delete ui;
 }
 
 void MainWindow::update() {
     ui->pbActual->setValue(fl->getCurrentLoadingProgress());
     ui->pbTotal->setValue(fl->getLoadedFile());
+    if(fl->getLoadedFile() == fl->getFileToLoadLenght())
+        QMessageBox::information(this,"Complete", "All files are loaded");
 }
 
 void MainWindow::on_loadFileButton_click() {

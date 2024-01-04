@@ -28,7 +28,7 @@ set(PROJECT_SOURCES
         Interfaces/Subject.h
         Subject/FileLoader.cpp
         Subject/FileLoader.h
-        Subject/FileP.h
+        Subject/File.h
 )
 
 add_executable(LoadingProgress main.cpp)
