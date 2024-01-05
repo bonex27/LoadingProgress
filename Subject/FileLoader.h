@@ -13,7 +13,7 @@
 class FileLoader : public Subject{
 
 public:
-    bool addFile(const FileP& f);
+    bool addFile(const File& f);
     bool removeFile(const std::string& name);
     int getCurrentLoadingProgress() const{
         return currentLoadingProgress;
@@ -27,7 +27,7 @@ public:
     }
     void loadFile();
 private:
-    std::list<FileP> fileDb;
+    std::list<File> fileDb;
     int currentLoadingProgress{0};
     int loadedFile{0};
 };

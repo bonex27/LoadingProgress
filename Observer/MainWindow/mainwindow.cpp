@@ -53,7 +53,7 @@ void MainWindow::on_selectFileButton_click() {
                                                               tr("Image Files (*.png *.jpg  *.txt)"));
         for (const auto& file: fileNames) {
 
-            if(!fl->addFile(FileP(file.fileName().toStdString(), file.path().toStdString())))
+            if(!fl->addFile(File(file.fileName().toStdString(), file.path().toStdString())))
                 QMessageBox::warning(this,"Warning", file.fileName()+" just loaded");
         }
 

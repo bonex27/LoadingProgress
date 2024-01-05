@@ -6,7 +6,7 @@
 #include "FileLoader.h"
 
 bool FileLoader::removeFile(const std::string& name) {
-    for(FileP item : fileDb) {
+    for(File item : fileDb) {
         if(item.getName() == name) {
             fileDb.remove(item);
             return true;
@@ -20,7 +20,7 @@ bool FileLoader::removeFile(const std::string& name) {
  * @param f file to be add
  * @return false if just exist
  * */
-bool FileLoader::addFile(const FileP& f) {
+bool FileLoader::addFile(const File& f) {
     auto findIter = std::find(fileDb.begin(), fileDb.end(), f);
     if(findIter != fileDb.end())
         return false;

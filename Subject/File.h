@@ -10,11 +10,10 @@
 #include <string>
 #include <utility>
 #include <ostream>
-class FileP {
+class File {
 
 public:
-
-    FileP( std::string name,  std::string path): name(name),path(path){}
+    File( std::string name,  std::string path): name(name),path(path){}
      std::string getName() const {
          return name;
      }
@@ -23,18 +22,17 @@ public:
          return path;
      }
 
-    bool operator==(const FileP &rhs) const {
+    bool operator==(const File &rhs) const {
         return rhs.name == this->name;
     }
 
-    bool operator!=(const FileP &rhs) const {
+    bool operator!=(const File &rhs) const {
         return rhs.name != this->name;
     }
 
 private:
 const std::string name;
 const std::string path;
-int size;
 };
 
 
